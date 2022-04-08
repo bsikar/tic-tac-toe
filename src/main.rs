@@ -116,15 +116,14 @@ impl TicTacToe {
                         && mouse_position.0 < x + w
                         && mouse_position.1 > y
                         && mouse_position.1 < y + h
+                        && self.board[i][j] == Player::None
                     {
-                        if self.board[i][j] == Player::None {
-                            if self.turn == Player::Player1 {
-                                self.board[i][j] = Player::Player1;
-                                self.turn = Player::Player2;
-                            } else {
-                                self.board[i][j] = Player::Player2;
-                                self.turn = Player::Player1;
-                            }
+                        if self.turn == Player::Player1 {
+                            self.board[i][j] = Player::Player1;
+                            self.turn = Player::Player2;
+                        } else {
+                            self.board[i][j] = Player::Player2;
+                            self.turn = Player::Player1;
                         }
                     }
                 }
@@ -184,6 +183,9 @@ async fn main() {
 
     loop {
         tictactoe.play();
+        if is_key_down(KeyCode::R) {
+            tictactoe = TicTacToe::new();
+        }
         next_frame().await;
     }
 }
