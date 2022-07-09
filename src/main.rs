@@ -20,6 +20,7 @@ struct TicTacToe {
 
 impl TicTacToe {
     fn new() -> TicTacToe {
+        rand::srand(macroquad::miniquad::date::now() as _);
         TicTacToe {
             board: [[Player::None; 3]; 3],
             winner: Player::None,
